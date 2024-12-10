@@ -67,10 +67,10 @@ The following endpoints are available:
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | /tasks | Fetch all task |
-| Get | /tasks/:id | Fetch a single task by ID |
+| GET | /tasks/:id | Fetch a single task by ID |
 | POST | /tasks | Creare a new task |
 | PUT | /tasks/:id | Update an existing task |
-| Delete | /tasks/:id | Delete a task by ID |
+| DELETE | /tasks/:id | Delete a task by ID |
 
 ### Scripts
 - npm start: Start the development server.
