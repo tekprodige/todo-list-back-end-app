@@ -1,14 +1,24 @@
 const express = require('express');
-const router = express.Router();
 const prisma = require('../prisma');
 
-//Route to get tasks
+// Create an Express router instance
+const router = express.Router();
+
+/**
+ * @route   GET /tasks
+ * @desc    Fetch all tasks from the database
+ * @access  Public
+ */
 router.get('/tasks', async (req, res) => {
     const tasks = await prisma.task.findMany();
     res.json(tasks);
 });
 
-//Route to create new tasks
+/**
+ * @route   POST /tasks
+ * @desc    Create a new task
+ * @access  Public
+ */
 router.post('/tasks', async (req, res) => {
     const { title, color } = req.body;
     const task = await prisma.task.create({
@@ -18,7 +28,11 @@ router.post('/tasks', async (req, res) => {
 });
 
 
-//Route to update tasks
+/**
+ * @route   PUT /tasks/:id
+ * @desc    Update an existing task by ID
+ * @access  Public
+ */
 router.put('/tasks/:id', async (req, res) => {
     const { id } = req.params;
     const { title, color, completed } = req.body;
@@ -29,7 +43,11 @@ router.put('/tasks/:id', async (req, res) => {
     res.json(task);
 });
 
-//Router to delete tasks
+/**
+ * @route   DELETE /tasks/:id
+ * @desc    Delete a task by ID
+ * @access  Public
+ */
 router.delete('/tasks/:id', async (req, res) => {
     const { id } = req.params;
     await prisma.task.delete({ where: { id: parseInt(id) } });
