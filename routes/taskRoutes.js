@@ -8,10 +8,10 @@ const router = express.Router();
  * @desc Fetch all tasks
  */
 router.get('/tasks', async (req, res) => {
-  console.log('Fetching all tasks'); // Log when the route is accessed
+  console.log('Fetching all tasks');
   try {
     const tasks = await prisma.task.findMany();
-    console.log('Tasks fetched:', tasks); // Log fetched tasks
+    console.log('Tasks fetched:', tasks);
     res.json(tasks);
   } catch (error) {
     console.error('Error fetching tasks:', error);
@@ -24,12 +24,12 @@ router.get('/tasks', async (req, res) => {
  * @desc Fetch a single task by ID
  */
 router.get('/tasks/:id', async (req, res) => {
-  console.log(`Fetching task with ID: ${req.params.id}`); // Log the ID being requested
+  console.log(`Fetching task with ID: ${req.params.id}`);
   const { id } = req.params;
 
   try {
     const task = await prisma.task.findUnique({
-      where: { id }, // Match string ID from the schema
+      where: { id },
     });
 
     if (!task) {
@@ -70,7 +70,7 @@ router.put('/tasks/:id', async (req, res) => {
   const { title, color, completed } = req.body;
   try {
     const task = await prisma.task.update({
-      where: { id }, // Use string ID directly
+      where: { id },
       data: { title, color, completed },
     });
     res.json(task);
@@ -88,7 +88,7 @@ router.delete('/tasks/:id', async (req, res) => {
   const { id } = req.params;
   try {
     await prisma.task.delete({
-      where: { id }, // Use string ID directly
+      where: { id }, 
     });
     res.status(204).send();
   } catch (error) {
